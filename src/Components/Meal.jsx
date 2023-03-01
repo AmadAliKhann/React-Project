@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import MealItem from "./MealItem";
 import RecipeIndex from "./RecipeIndex";
+import Slider from "./Slider";
 
+const Main = styled.div`
+      width: 80%;
+  margin: 0 auto;
+  text-align: center;
+`
 const Meal = () => {
   const [url, setUrl] = useState(
     "https://www.themealdb.com/api/json/v1/1/search.php?f=a"
@@ -40,7 +47,8 @@ const searchRecipe =(evt)=>{
         <div className="searchBox">
           <input type="search" className="search-bar" onChange={e=>setSearch(e.target.value)} onKeyPress={searchRecipe}/>
         </div>
-        <div className="container">
+        <Slider/>
+        <div className="container-main">
           
           {
             show ? <MealItem data={item}/> : "Not Found"
