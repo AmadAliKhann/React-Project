@@ -1,14 +1,83 @@
 import { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import styled from "styled-components";
 
 let vId = "";
+const ContentContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+`;
+const ContentImg = styled.img`
+  width: 50%;
+  height: 600px;
+  border: 2px solid white;
+  box-shadow: 0px 0px 10px 10px;
+`;
+const ContentInfo = styled.div`
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  color: black;
+  font-size: 1.5rem;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+`;
+const Title = styled.h1``;
+const Name = styled.h2``;
+const Category = styled.h2``;
+const RecipeDetailsContainer = styled.div`
+  width: 70%;
+  margin: 2rem auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+const Ingredients = styled.div`
+  flex-basis: 50%;
+  text-align: justify;
+`;
+const Instructions = styled.div`
+  flex-basis: 50%;
+  text-align: justify;
+`;
+const InstructionTitle = styled.h2``;
+const InstructionContent = styled.h4``;
+const IngredientsTitle = styled.h2``;
+const IngredientsContent = styled.h4`
+  margin-top: 1.5rem;
+  font-weight: bold;
+`;
+const VideoContainer = styled.div`
+  width: 80%;
+  margin: 3rem auto;
+`;
+const Video = styled.iframe`
+  height: 515px;
+  width: 100%;
+`;
+const ButtonContainer = styled.div`
+  text-align: center;
+  padding-bottom: 50px;
+`;
+const Button = styled.button`
+  width: 5%;
+  background-color: #030e12;
+  color: white;
+  border-radius: 5px;
+  border: none;
+  font-size: 1.5rem;
+`;
 const RecipeInfo = () => {
   const [item, setItem] = useState();
   const { MealId } = useParams();
   const navigate = useNavigate();
-  const handleBackButton=()=>{
+  const handleBackButton = () => {
     navigate("/");
-  }
+  };
   if (MealId !== "") {
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${MealId}`)
       .then((res) => res.json())
@@ -28,58 +97,58 @@ const RecipeInfo = () => {
         ""
       ) : (
         <>
-          <div className="content">
-            <img src={item.strMealThumb} alt="" />
-            <div className="inner-content">
-              <h1>{item.strMeal}</h1>
-              <h2>{item.strArea} Food</h2>
-              <h3>Category {item.strCategory}</h3>
-            </div>
-          </div>
-          <div className="recipe-details">
-            <div className="ingredients">
-              <h2>Ingredients</h2>
+          <ContentContainer>
+            <ContentImg src={item.strMealThumb} alt="" />
+            <ContentInfo>
+              <Title>{item.strMeal}</Title>
+              <Name>{item.strArea} Food</Name>
+              <Category>Category {item.strCategory}</Category>
+            </ContentInfo>
+          </ContentContainer>
+          <RecipeDetailsContainer>
+            <Ingredients>
+              <IngredientsTitle>Ingredients</IngredientsTitle>
               <br />
-              <h4>
+              <IngredientsContent>
                 {item.strIngredient1}:{item.strMeasure1}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient2}:{item.strMeasure2}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient3}:{item.strMeasure3}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient4}:{item.strMeasure4}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient5}:{item.strMeasure5}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient6}:{item.strMeasure6}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient7}:{item.strMeasure7}
-              </h4>
-              <h4>
+              </IngredientsContent>
+              <IngredientsContent>
                 {item.strIngredient8}:{item.strMeasure8}
-              </h4>
-            </div>
-            <div className="instructions">
-              <h2>Instructions</h2>
+              </IngredientsContent>
+            </Ingredients>
+            <Instructions>
+              <InstructionTitle>Instructions</InstructionTitle>
               <br />
-              <h4>{item.strInstructions}</h4>
-            </div>
-          </div>
-          <div className="video">
-            <iframe
+              <InstructionContent>{item.strInstructions}</InstructionContent>
+            </Instructions>
+          </RecipeDetailsContainer>
+          <VideoContainer>
+            <Video
               src={`https://www.youtube.com/embed/${vId}`}
               title="recipe"
-            ></iframe>
-          </div>
-          <div className="back-button">
-            <button className="back" onClick={handleBackButton}>Back</button>
-          </div>
+            ></Video>
+          </VideoContainer>
+          <ButtonContainer>
+            <Button onClick={handleBackButton}>Back</Button>
+          </ButtonContainer>
         </>
       )}
     </>

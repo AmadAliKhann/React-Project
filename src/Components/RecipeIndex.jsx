@@ -1,3 +1,25 @@
+import styled from "styled-components";
+
+const Container = styled.div`
+  
+  margin: 0 auto;
+`
+const IndexButtons = styled.div`
+    width: 50px;
+  height: 40px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  margin: 0 5px 0 5px;
+  cursor: pointer;
+`
+const IndexLetters = styled.h3`
+    
+`
+
+
 const RecipeIndex = ({ alphaIndex }) => {
   const alpha = [
     "A",
@@ -32,9 +54,11 @@ const RecipeIndex = ({ alphaIndex }) => {
     <>
       {alpha.map((item) => {
         return (
-          <div className="numBox" key={num++} onClick={() => alphaIndex(item)}>
-            <h3>{item}</h3>
-          </div>
+          <Container>
+          <IndexButtons key={num++} onClick={() => alphaIndex(item)}>
+            <IndexLetters>{item}</IndexLetters>
+          </IndexButtons>
+          </Container>
         );
       })}
     </>
