@@ -50,11 +50,12 @@ const RecipeIndex = ({ alphaIndex }) => {
     "Z",
   ];
   var num = 0;
+  var num1 = 0;
   return (
     <>
       {alpha.map((item) => {
         return (
-          <Container>
+          <Container key={num1++}>
           <IndexButtons key={num++} onClick={() => alphaIndex(item)}>
             <IndexLetters>{item}</IndexLetters>
           </IndexButtons>
