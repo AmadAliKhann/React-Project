@@ -3,6 +3,9 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import styled from "styled-components";
 import sliderItems from "../data";
 
+
+import {useTranslation} from "react-i18next"
+
 const Container = styled.div`
   width: 80%;
   margin: 0 auto;
@@ -93,7 +96,9 @@ const Slider = () => {
     } else {
       setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
     }
-  };
+  }
+  const {t,i18n} = useTranslation(["slider"])
+  
   return (
     <Container>
       <Arrow direction="left" onClick={() => handleClick("left")}>
@@ -101,14 +106,14 @@ const Slider = () => {
       </Arrow>
       <Wrapper slideIndex={slideIndex}>
         {sliderItems.map((item) => (
-          <Slide bg={item.bg}>
+          <Slide bg={item.bg} key={item.id}>
             <ImageContainer>
               <Image src={item.img} />
             </ImageContainer>
             <InfoContainer>
-              <Title>{item.title}</Title>
-              <Desc>{item.desc}</Desc>
-              <Button>Try it</Button>
+              <Title>{item.title[`${i18n.language}`]}</Title>
+              <Desc>{item.desc[`${i18n.language}`]}</Desc>
+              <Button>{t("tryit")}</Button>
             </InfoContainer>
           </Slide>
         ))}

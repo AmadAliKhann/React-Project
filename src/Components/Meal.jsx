@@ -3,6 +3,10 @@ import styled from "styled-components";
 import MealItem from "./MealItem";
 import RecipeIndex from "./RecipeIndex";
 import Slider from "./Slider";
+import LanguageSelector from "./LanguageSelector";
+import {useTranslation} from "react-i18next"
+
+
 
 const Main = styled.div`
   width: 100%;
@@ -74,13 +78,16 @@ const Meal = () => {
     if (evt.key === "Enter") {
       setUrl(`https://www.themealdb.com/api/json/v1/1/search.php?s=${search}`);
     }
-  };
+  }
+  ;
+  const {t} = useTranslation(["meal"])
   return (
     <>
       <Main>
         <HeadingContainer>
-          <Title>Welcome to KHANZ Kitchen</Title>
-          <Desc>Variety is the spice of Life... and we have it..</Desc>
+          <Title>{t("welcome")}</Title>
+          <Desc>{t("desc")}</Desc>
+          <LanguageSelector/>
         </HeadingContainer>
 
         <Slider />
@@ -89,7 +96,7 @@ const Meal = () => {
             type="search"
             onChange={(e) => setSearch(e.target.value)}
             onKeyPress={searchRecipe}
-          placeholder = "Recipe Search"/>
+          placeholder = {t("placeholder")}/>
         </SearchBox>
         <ItemsContainer>
           {show ? <MealItem data={item} /> : "Not Found"}
