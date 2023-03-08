@@ -12,7 +12,7 @@ function App() {
 
     <Suspense fallback = {null}>
     <Routes>
-      <Route path='/' element ={<Meal/>}/>
+      <Route exact path='/React-Project' element ={<Meal/>}/>
       <Route path="/:MealId" element={<RecipeInfo/>}/>
     </Routes>
     </Suspense>
