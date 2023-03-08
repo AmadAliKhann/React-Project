@@ -12,7 +12,7 @@ i18n
   .use(initReactI18next) // pass the i18n instance to react-i18next
   .init({
     backend:{
-        loadPath:"/assets/i18n/{{ns}}/{{lng}}.json",
+        loadPath:"/React-Project/assets/i18n/{{ns}}/{{lng}}.json",
     },
     fallbackLng: "en",
     debug: false,
