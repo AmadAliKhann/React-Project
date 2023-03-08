@@ -76,7 +76,7 @@ const RecipeInfo = () => {
   const { MealId } = useParams();
   const navigate = useNavigate();
   const handleBackButton = () => {
-    navigate("/");
+    navigate("/React-Project");
   };
   if (MealId !== "") {
     fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${MealId}`)
